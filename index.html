@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario de la escuela</title>
+ 
+<style>
+  /* Fondo general */
+  body {
+    background-color: #fff0f5;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: #a83268;
+    margin: 0;
+    padding: 20px;
+  }
+
+  /* Formulario */
+  .container {
+    background-color: #fffafd;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px #f4b6d2;
+    border: 1px solid #ffc1dc;
+  }
+
+  /* Títulos */
+  h1, h2, h3 {
+    color: #d63384;
+  }
+
+  /* Preguntas y etiquetas */
+  label {
+    color: #c13c7a;
+    font-weight: bold;
+  }
+
+  /* Campos para escribir */
+  input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 16px;
+    border: 1px solid #f3a6c8;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #8f285b;
+    box-sizing: border-box;
+    font-size: 15px;
+  }
+
+  /* Botón */
+  button {
+    background-color: #f56ba8;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background-color: #e84b91;
+  }
+  </style>
+</head>
+<body>
+
+  <h2>Captura de Datos</h2>
+
+  <form id="formulario">
+    <input type="hidden" id="id">
+
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" required><br><br>
+
+    <label for="mejorar">¿Que te propones a mejorar en la escuela?:</label><br>
+    <input type="text" id="mejorar" required><br><br>
+
+    <label for="cambio">¿Que cambiarias de la escuela?:</label><br>
+    <input type="text" id="cambio" required><br><br>
+
+
+    <!-- >>> CAMPO NUEVO: ANIMAL (1 de 6 en HTML)
+         Lista desplegable (<select>) para elegir opciones.
+         Para agregar más opciones, simplemente duplica una etiqueta <option>:
+         <option value="Elefante">Elefante</option>
+    -->
+    <label for="seccion">¿En que seccion vas?:</label><br>
+    <select id="seccion" required>
+      <option value="" disabled selected>Selecciona una opción...</option>
+      <option value="preescolar">Preescolar</option>
+      <option value="primaria">Primaria</option>
+      <option value="secundaria">Secundaria</option>
+      <option value="bachillerato">Bachillerato</option>
+      <option value="universidad">Universidad</option>
+      <option value="otro">Otro</option>
+    </select><br><br>
+
+    <label for="materia">¿Cual es tu materia favorita?:</label><br>
+    <select id="materia" required>
+      <option value="" disabled selected>Selecciona una opción...</option>
+      <option value="matematicas">Matematicas</option>
+      <option value="biologia">Biologia</option>
+      <option value="fisica">Fisica</option>
+      <option value="literatura">Literatura</option>
+      <option value="historia">Historia</option>
+      <option value="otro">Otro</option>
+    </select><br><br>
+
+    <label for="school">¿Te gusta la escuela?:</label><br>
+    <select id="school" required>
+      <option value="" disabled selected>Selecciona una opción...</option>
+      <option value="si">SI</option>
+      <option value="no">NO</option>
+      <option value="aveces">A veces</option>
+    </select><br><br>
+
+<label for="tarea">¿Entregas tus tareas?:</label><br>
+    <select id="tarea" required>
+      <option value="" disabled selected>Selecciona una opción...</option>
+      <option value="si">SI</option>
+      <option value="no">NO</option>
+      <option value="aveces">A veces</option>
+    </select><br><br>
+
+    <label for="transporte">¿Como llegas a la escuela?:</label><br>
+    <select id="transporte" required>
+      <option value="" disabled selected>Selecciona una opción...</option>
+      <option value="autobus">Autobus</option>
+      <option value="carro">Carro</option>
+      <option value="bicicleta">Bicicleta</option>
+      <option value="other">Otro</option>
+    </select><br><br>
+
+    <label for="participacion">¿Participas en clase?:</label><br>
+    <select id="participacion" required>
+      <option value="" disabled selected>Selecciona una opción...</option>
+      <option value="si">SI</option>
+      <option value="no">NO</option>
+      <option value="aveces">A veces</option>
+    </select><br><br>
+
+    <label for="dificultad">¿Se te complica la escuela?:</label><br>
+    <select id="dificultad" required>
+      <option value="" disabled selected>Selecciona una opción...</option>
+      <option value="si">SI</option>
+      <option value="no">NO</option>
+      <option value="aveces">A veces</option>
+    </select><br><br>
+
+    
+
+    <!-- >>> AGREGAR CAMPO NUEVO (lugar 1 de 6 anterior)
+         Copia un bloque label + input (o select) y cambia el nombre y el id. -->
+
+    <button type="button" id="btnRegistrar">Registrar</button>
+    <button type="button" id="btnConsultar">Consultar</button>
+    <button type="button" id="btnModificar">Modificar</button>
+    <button type="button" id="btnEliminar">Eliminar</button>
+  </form>
+
+  <p id="estado"></p>
+
+  <div id="seccionTabla">
+    <h2>Registros</h2>
+    <button type="button" id="btnCerrar">Cerrar tabla</button>
+    <br><br>
+    <input type="text" id="buscador" placeholder="Buscar por nombre...">
+
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Nombre</th>
+          <th>¿Que te propones a mejorar en la escuela?</th>
+          <th>¿Que cambiarias de la escuela?</th>
+          <th>¿En que seccion vas?</th> <!-- >>> AGREGAR CAMPO NUEVO (lugar 2 de 6): Encabezado de la tabla -->
+          <th>¿Cual es tu materia favorita?</th>
+          <th>¿Te gusta la escuela?</th>
+          <th>¿Entregas tus tareas?</th>
+          <th>¿Como llegas a la escuela?</th>
+          <th>¿Participas en clase?</th>
+          <th>¿Se te complica la escuela?</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla"></tbody>
+    </table>
+  </div>
+
+  <script>
+    // Pega aquí la URL de tu implementación de Apps Script
+    var URL_SCRIPT = "https://script.google.com/macros/s/AKfycbwvqFTv6oHdAldxiQnNAFS1dTcQsm2bbofOYVnfqJ_5bwB6MmzdkoGgmMAopsVtwgh8MA/exec";
+    var registros = [];
+    var tablaVisible = false;
+
+    // ---------- Enviar datos al script ----------
+    function enviar(datos) {
+      return fetch(URL_SCRIPT, {
+        method: "POST",
+        body: new URLSearchParams(datos)
+      }).then(function (r) { return r.json(); });
+    }
+
+    // ---------- Botones activos según el estado ----------
+    function actualizarBotones() {
+      var hayRegistro = document.getElementById("id").value !== "";
+      document.getElementById("btnRegistrar").disabled = hayRegistro;
+      document.getElementById("btnModificar").disabled = !hayRegistro;
+      document.getElementById("btnEliminar").disabled = !hayRegistro;
+    }
+
+    function limpiarFormulario() {
+      document.getElementById("formulario").reset();
+      document.getElementById("id").value = "";
+      actualizarBotones();
+    }
+
+    // ---------- REGISTRAR ----------
+    document.getElementById("btnRegistrar").onclick = function () {
+      if (!document.getElementById("formulario").reportValidity()) return;
+
+      document.getElementById("estado").textContent = "Guardando...";
+      enviar({
+        accion: "guardar",
+
+        // >>> AGREGAR CAMPO NUEVO (lugar 3 de 6)
+        // Cada campo termina con coma, EXCEPTO el último.
+        nombre: document.getElementById("nombre").value,
+        mejorar: document.getElementById("mejorar").value,
+        cambio: document.getElementById("cambio").value,
+        seccion: document.getElementById("seccion").value, // Nuevo campo añadido
+        materia: document.getElementById("materia").value,
+        school: document.getElementById("school").value,
+        tarea: document.getElementById("tarea").value,
+        transporte: document.getElementById("transporte").value,
+        participacion: document.getElementById("participacion").value,
+        dificultad: document.getElementById("dificultad").value
+
+      }).then(function (respuesta) {
+        terminarAccion(respuesta, "¡Registro guardado!");
+      });
+    };
+
+    // ---------- CONSULTAR ----------
+    document.getElementById("btnConsultar").onclick = function () {
+      document.getElementById("estado").textContent = "Consultando...";
+      tablaVisible = true;
+      document.getElementById("seccionTabla").style.display = "block";
+      cargarRegistros(function () {
+        document.getElementById("estado").textContent = "";
+      });
+    };
+
+    function cargarRegistros(alTerminar) {
+      fetch(URL_SCRIPT)
+        .then(function (r) { return r.json(); })
+        .then(function (datos) {
+          registros = datos;
+          mostrarTabla();
+          if (alTerminar) alTerminar();
+        });
+    }
+
+    function mostrarTabla() {
+      var filtro = document.getElementById("buscador").value.trim().toLowerCase();
+      var tabla = document.getElementById("tabla");
+      tabla.innerHTML = "";
+
+      registros.forEach(function (reg) {
+        // Solo muestra los nombres que INICIAN con lo escrito
+        if (!reg.nombre.toString().toLowerCase().startsWith(filtro)) return;
+
+        var tr = document.createElement("tr");
+        agregarCelda(tr, new Date(reg.fecha).toLocaleString());
+
+        // >>> AGREGAR CAMPO NUEVO (lugar 4 de 6)
+        // Agrega una línea por cada campo, en el mismo orden que los <th>.
+        agregarCelda(tr, reg.nombre);
+        agregarCelda(tr, reg.mejorar);
+        agregarCelda(tr, reg.cambio);
+        agregarCelda(tr, reg.seccion);
+        agregarCelda(tr, reg.materia);
+        agregarCelda(tr, reg.school);
+        agregarCelda(tr, reg.tarea);
+        agregarCelda(tr, reg.transporte);
+        agregarCelda(tr, reg.participacion);
+        agregarCelda(tr, reg.dificultad); // Muestra el animal en la tabla
+
+        var td = document.createElement("td");
+
+        var btnModificarFila = document.createElement("button");
+        btnModificarFila.textContent = "Modificar registro";
+        btnModificarFila.onclick = function () { cargarEnFormulario(reg); };
+
+        var btnEliminarFila = document.createElement("button");
+        btnEliminarFila.textContent = "Eliminar";
+        btnEliminarFila.onclick = function () { eliminar(reg.id); };
+
+        td.appendChild(btnModificarFila);
+        td.appendChild(btnEliminarFila);
+        tr.appendChild(td);
+        tabla.appendChild(tr);
+      });
+    }
+
+    function agregarCelda(fila, texto) {
+      var td = document.createElement("td");
+      td.textContent = texto;
+      fila.appendChild(td);
+    }
+
+    document.getElementById("buscador").oninput = mostrarTabla;
+
+    // ---------- CERRAR TABLA ----------
+    document.getElementById("btnCerrar").onclick = function () {
+      tablaVisible = false;
+      document.getElementById("seccionTabla").style.display = "none";
+      document.getElementById("buscador").value = "";
+      document.getElementById("tabla").innerHTML = "";
+    };
+
+    // ---------- Pasar el registro al formulario ----------
+    function cargarEnFormulario(reg) {
+      document.getElementById("id").value = reg.id;
+
+      // >>> AGREGAR CAMPO NUEVO (lugar 5 de 6)
+      // Agrega una línea por cada campo (aquí SÍ todas terminan en punto y coma).
+      document.getElementById("nombre").value = reg.nombre;
+      document.getElementById("mejorar").value = reg.mejorar;
+      document.getElementById("cambio").value = reg.cambio;
+      document.getElementById("seccion").value = reg.seccion;
+      document.getElementById("materia").value = reg.materia;
+      document.getElementById("school").value = reg.school;
+      document.getElementById("tarea").value = reg.tarea;
+      document.getElementById("transporte").value = reg.transporte;
+      document.getElementById("participacion").value = reg.participacion;
+      document.getElementById("dificultad").value = reg.dificultad; // Carga el animal seleccionado
+
+      document.getElementById("estado").textContent =
+        "Modificando registro: cambia los datos y presiona Modificar";
+      actualizarBotones();
+
+      window.scrollTo(0, 0);                     // sube al formulario
+      document.getElementById("nombre").focus(); // cursor en el nombre
+    }
+
+    // ---------- MODIFICAR ----------
+    document.getElementById("btnModificar").onclick = function () {
+      var id = document.getElementById("id").value;
+
+      if (id === "") {
+        alert("Primero elige un registro con el botón 'Modificar registro'");
+        return;
+      }
+      if (!document.getElementById("formulario").reportValidity()) return;
+
+      document.getElementById("estado").textContent = "Modificando...";
+      enviar({
+        accion: "editar",
+        id: id,
+
+        // >>> AGREGAR CAMPO NUEVO (lugar 6 de 6)
+        // Igual que en REGISTRAR: coma en todos, menos en el último.
+        nombre: document.getElementById("nombre").value,
+        mejorar: document.getElementById("mejorar").value,
+        cambio: document.getElementById("cambio").value,
+        seccion: document.getElementById("seccion").value,
+        materia: document.getElementById("materia").value,
+        school: document.getElementById("school").value,
+        tarea: document.getElementById("tarea").value,
+        transporte: document.getElementById("transporte").value,
+        participacion: document.getElementById("participacion").value,
+        dificultad: document.getElementById("dificultad").value // Envía el animal actualizado
+
+      }).then(function (respuesta) {
+        terminarAccion(respuesta, "¡Registro modificado!");
+      });
+    };
+
+    // ---------- ELIMINAR ----------
+    document.getElementById("btnEliminar").onclick = function () {
+      eliminar(document.getElementById("id").value);
+    };
+
+    function eliminar(id) {
+      if (!confirm("¿Seguro que quieres eliminar este registro?")) return;
+
+      document.getElementById("estado").textContent = "Eliminando...";
+      enviar({ accion: "eliminar", id: id }).then(function (respuesta) {
+        terminarAccion(respuesta, "Registro eliminado");
+      });
+    }
+
+    // ---------- Mensaje al terminar cualquier acción ----------
+    function terminarAccion(respuesta, mensajeOk) {
+      document.getElementById("estado").textContent =
+        respuesta.ok ? mensajeOk : "Error: " + respuesta.mensaje;
+      limpiarFormulario();
+      if (tablaVisible) cargarRegistros();  // refresca la tabla si está abierta
+    }
+
+    actualizarBotones();
+  </script>
+
+</body>
+</html>
